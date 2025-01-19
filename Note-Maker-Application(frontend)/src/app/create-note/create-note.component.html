@@ -1,0 +1,51 @@
+<mat-toolbar color="accent">
+  <div *ngIf="loggedIn()">
+    <div><mat-icon>account</mat-icon>&nbsp;
+      <a class="welcome-text" style="white-space: nowrap;">Welcome, {{ currentUser().firstName }}</a>
+    </div>
+  </div>
+  <span class="spacer"></span>
+  <div class="button-group">
+    <span class="button-spacer"></span>
+    <button mat-raised-button routerLink="/">Back</button>&nbsp;
+    <button mat-raised-button routerLink="/login"><mat-icon>exit_app</mat-icon>Logout</button>
+  </div>
+</mat-toolbar>
+
+
+<div class="alert alert-success" *ngIf="noteAddedSuccessfully">
+  Note added successfully!
+</div>
+
+<div class="container">
+  <h2 class="mt-3 text-center">Create Notes</h2>
+  <hr>
+  <div class="row justify-content-center py-2">
+    <form (submit)="createNote(addPostForm)" #addPostForm="ngForm" class="example-form" style="width: 400px;">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input name="title" type="text" class="form-control" [(ngModel)]="notes.title" required #title="ngModel">
+        <div *ngIf="title.errors && (title.invalid && title.touched)" class="alert alert-danger">
+          This field is Mandatory
+        </div>
+      </div>
+      <br/>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" class="form-control" [(ngModel)]="notes.description"
+          required #description="ngModel" pattern="^[a-zA-Z@,;&*+- ]*$" (input)="limitDescriptionLength($event)"
+          [class.is-invalid]="description.invalid && description.touched"></textarea>
+        <div *ngIf="description.errors && (description.invalid && description.touched)" class="alert alert-danger">
+          <!-- Add error message if needed -->
+        </div>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+      <div align="end">
+        <button type="submit" class="btn btn-info mr-3">Add</button>
+        <button type="reset" class="btn btn-danger">Clear</button>
+      </div>
+    </form>
+  </div>
+</div>

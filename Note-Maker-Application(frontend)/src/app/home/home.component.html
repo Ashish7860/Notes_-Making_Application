@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note-Maker-Application</title>
+</head>
+
+<mat-toolbar color="accent">
+  <span><a mat-icon-button routerLink="/">Note-Maker-Application</a></span>
+  <span class="spacer"></span>
+  <div class="button-group">
+    <button mat-raised-button class="custom-button create-button" type="button" routerLink="/createnotes" *ngIf="loggedIn()">Create Notes</button>
+    <button mat-raised-button class="custom-button view-button" type="button" routerLink="/listnotes" *ngIf="loggedIn()">View Notes</button>
+    <button mat-raised-button class="custom-button logout-button" type="button" (click)="logout()" *ngIf="loggedIn()">Logout</button>
+  </div>
+</mat-toolbar>
+
+<body>
+ 
+    <main>
+        <div class="background-image">
+            
+        </div>
+        <div class="button-container" *ngIf="!loggedIn()">
+          <button mat-raised-button class="large-button" routerLink="/login">
+            <mat-icon>logout</mat-icon>Login
+          </button>
+          <button mat-raised-button class="large-button" routerLink="/signup">
+            <mat-icon>person_add</mat-icon>Signup
+          </button>
+        </div>
+        
+        <br>
+        <br>
+        <div class="content">
+            <h1 class="main-title">Note Maker Application - Ink and Insights</h1>
+        </div>
+    </main>
+    
